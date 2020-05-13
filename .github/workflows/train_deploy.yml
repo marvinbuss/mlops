@@ -44,12 +44,13 @@ jobs:
           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
           run_id:  ${{ steps.aml_run.outputs.run_id }}
           experiment_name: ${{ steps.aml_run.outputs.experiment_name }}
+          parameters_file: "registermodel2.json"
 
-    # Deploy model in Azure Machine Learning to ACI
-    - name: Deploy model
-      id: aml_deploy
-      uses: Azure/aml-deploy@master
-      with:
-          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
-          model_name:  ${{ steps.aml_registermodel.outputs.model_name }}
-          model_version: ${{ steps.aml_registermodel.outputs.model_version }}
+    # # Deploy model in Azure Machine Learning to ACI
+    # - name: Deploy model
+    #   id: aml_deploy
+    #   uses: Azure/aml-deploy@master
+    #   with:
+    #       azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+    #       model_name:  ${{ steps.aml_registermodel.outputs.model_name }}
+    #       model_version: ${{ steps.aml_registermodel.outputs.model_version }}
