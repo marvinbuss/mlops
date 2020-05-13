@@ -12,6 +12,7 @@ This template can be used for easily setting up a data science or machine learni
 
 ### 1. Prerequisites
 
+
 The following prerequisites are required to make this repository work:
 - Azure subscription
 - Contributor access to the Azure subscription
