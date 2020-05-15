@@ -85,7 +85,7 @@ def main(args):
     
     # train a classifier
     classifier = 'knn'
-    model = KNeighborsClassifier(n_neighbors = 7, p = 2, metric='minkowski').fit(data['train']['X'], data['train']['y'])
+    model = KNeighborsClassifier(n_neighbors = 7, p = 2, metric = 'minkowski').fit(data['train']['X'], data['train']['y'])
     predictions = model.predict(data['test']['X'])
 
     # accuracy for X_test
