@@ -83,38 +83,38 @@ def main(args):
             'test': {'X': x_test, 'y': y_test}}
     
     # train a SVM classifier
-    svm_model = SVC(kernel=args.kernel, C=args.penalty, gamma='scale').fit(data['train']['X'], data['train']['y'])
-    svm_predictions = svm_model.predict(data['test']['X'])
+    model = SVC(kernel=args.kernel, C=args.penalty, gamma='scale').fit(data['train']['X'], data['train']['y'])
+    predictions = model.predict(data['test']['X'])
 
     # accuracy for X_test
-    accuracy = svm_model.score(data['test']['X'], data['test']['y'])
+    accuracy = model.score(data['test']['X'], data['test']['y'])
     print('Accuracy of SVM classifier on test set: {:.2f}'.format(accuracy))
     run.log('Accuracy', np.float(accuracy))
     
     # precision for X_test
-    precision = precision_score(svm_predictions, data["test"]["y"], average='weighted')
+    precision = precision_score(predictions, data["test"]["y"], average='weighted')
     print('Precision of SVM classifier on test set: {:.2f}'.format(precision))
     run.log('precision', precision)
     
     # recall for X_test
-    recall = recall_score(svm_predictions, data["test"]["y"], average='weighted')
+    recall = recall_score(predictions, data["test"]["y"], average='weighted')
     print('Recall of SVM classifier on test set: {:.2f}'.format(recall))
     run.log('recall', recall)
     
     # f1-score for X_test
-    f1 = f1_score(svm_predictions, data["test"]["y"], average='weighted')
+    f1 = f1_score(predictions, data["test"]["y"], average='weighted')
     print('F1-Score of SVM classifier on test set: {:.2f}'.format(f1))
     run.log('f1-score', f1)
     
     # create a confusion matrix
     labels = ['Iris-setosa', 'Iris-versicolor', 'Iris-virginica']
     labels_numbers = [0, 1, 2]
-    cm = confusion_matrix(y_test, svm_predictions, labels_numbers)
+    cm = confusion_matrix(y_test, predictions, labels_numbers)
     log_confusion_matrix(cm, labels)
     
     # files saved in the "outputs" folder are automatically uploaded into run history
     model_file_name = "model.pkl"
-    joblib.dump(svm_model, os.path.join('outputs', model_file_name))
+    joblib.dump(model, os.path.join('outputs', model_file_name))
 
 
 def parse_args():
