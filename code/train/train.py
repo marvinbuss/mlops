@@ -7,6 +7,7 @@ import joblib
 import matplotlib.pyplot as plt
 
 from sklearn import datasets
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
 from sklearn.model_selection import train_test_split
@@ -82,28 +83,29 @@ def main(args):
     data = {'train': {'X': x_train, 'y': y_train},
             'test': {'X': x_test, 'y': y_test}}
     
-    # train a SVM classifier
-    model = SVC(kernel=args.kernel, C=args.penalty, gamma='scale').fit(data['train']['X'], data['train']['y'])
+    # train a classifier
+    classifier = 'knn'
+    model = KNeighborsClassifier(n_neighbors = 7, p = 2, metric='minkowski').fit(data['train']['X'], data['train']['y'])
     predictions = model.predict(data['test']['X'])
 
     # accuracy for X_test
     accuracy = model.score(data['test']['X'], data['test']['y'])
-    print('Accuracy of SVM classifier on test set: {:.2f}'.format(accuracy))
+    print('Accuracy of {} classifier on test set: {:.2f}'.format(classifier,accuracy))
     run.log('Accuracy', np.float(accuracy))
     
     # precision for X_test
     precision = precision_score(predictions, data["test"]["y"], average='weighted')
-    print('Precision of SVM classifier on test set: {:.2f}'.format(precision))
+    print('Precision of {} classifier on test set: {:.2f}'.format(classifier,precision))
     run.log('precision', precision)
     
     # recall for X_test
     recall = recall_score(predictions, data["test"]["y"], average='weighted')
-    print('Recall of SVM classifier on test set: {:.2f}'.format(recall))
+    print('Recall of {} classifier on test set: {:.2f}'.format(classifier,recall))
     run.log('recall', recall)
     
     # f1-score for X_test
     f1 = f1_score(predictions, data["test"]["y"], average='weighted')
-    print('F1-Score of SVM classifier on test set: {:.2f}'.format(f1))
+    print('F1-Score of {} classifier on test set: {:.2f}'.format(classifier,f1))
     run.log('f1-score', f1)
     
     # create a confusion matrix
