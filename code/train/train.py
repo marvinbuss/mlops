@@ -84,8 +84,8 @@ def main(args):
             'test': {'X': x_test, 'y': y_test}}
     
     # train a classifier
-    classifier = 'knn'
-    model = KNeighborsClassifier(n_neighbors = 7, p = 2, metric='minkowski').fit(data['train']['X'], data['train']['y'])
+    classifier = 'svc'
+    model = SVC(kernel=args.kernel, C=args.penalty, gamma='scale').fit(data['train']['X'], data['train']['y'])
     predictions = model.predict(data['test']['X'])
 
     # accuracy for X_test
