@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 
 from sklearn import datasets
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import SVC
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
 from sklearn.model_selection import train_test_split
 
@@ -84,8 +83,8 @@ def main(args):
             'test': {'X': x_test, 'y': y_test}}
     
     # train a classifier
-    classifier = 'svc'
-    model = SVC(kernel=args.kernel, C=args.penalty, gamma='scale').fit(data['train']['X'], data['train']['y'])
+    classifier = 'knn'
+    model = KNeighborsClassifier(n_neighbors = 7, p = 2, metric='minkowski').fit(data['train']['X'], data['train']['y'])
     predictions = model.predict(data['test']['X'])
 
     # accuracy for X_test

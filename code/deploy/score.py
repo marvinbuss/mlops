@@ -3,7 +3,6 @@ import joblib
 import numpy as np
 import argparse
 
-from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 from azureml.core import Model
 from azureml.monitoring import ModelDataCollector
