@@ -7,7 +7,7 @@ import joblib
 import matplotlib.pyplot as plt
 
 from sklearn import datasets
-from sklearn.sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
 from sklearn.model_selection import train_test_split
 
