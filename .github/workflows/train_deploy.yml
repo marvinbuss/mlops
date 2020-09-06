@@ -13,7 +13,7 @@ jobs:
     # Connect or Create the Azure Machine Learning Workspace
     - name: Connect/Create Azure Machine Learning Workspace
       id: aml_workspace
-      uses: Azure/aml-workspace@azureml_1_13
+      uses: Azure/aml-workspace@master
       with:
           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
     
