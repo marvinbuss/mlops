@@ -1,0 +1,34 @@
+# Actions train a model on Azure Machine Learning
+name: deploy-model-2
+on: [push, pull_request]
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+
+    env:
+      MODEL_NAME: "mlops-testing"
+      MODEL_VERSION: "71"
+
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Check Out Repository
+      id: checkout_repository
+      uses: actions/checkout@v2
+        
+    # Connect or Create the Azure Machine Learning Workspace
+    - name: Connect/Create Azure Machine Learning Workspace
+      id: aml_workspace
+      uses: Azure/aml-workspace@master
+      with:
+          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    # Deploy model in Azure Machine Learning to ACI
+    - name: Deploy model
+      id: aml_deploy
+      uses: Azure/aml-deploy@master
+      with:
+          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+          model_name: $MODEL_NAME
+          model_version: $MODEL_VERSION
+          parameters_file: "deploy_aci2.json"
