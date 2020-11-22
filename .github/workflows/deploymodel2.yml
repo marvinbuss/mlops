@@ -29,6 +29,6 @@ jobs:
       uses: Azure/aml-deploy@master
       with:
           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
-          model_name: $MODEL_NAME
-          model_version: $MODEL_VERSION
+          model_name: ${{ env.MODEL_NAME }}
+          model_version: ${{ env.MODEL_VERSION }}
           parameters_file: "deploy_aci2.json"
