@@ -9,6 +9,5 @@ dependencies:
   - matplotlib=3.3.3
   - pip:
     - azureml-defaults==1.19.0
-    - azureml-dataprep[pandas,fuse]==2.7.1
 channels:
   - conda-forge
